@@ -13,7 +13,7 @@ import com.tlamatini.persistencia.*;
 
 import org.junit.Test;
 
-public class TestDAOCompra {
+public class DAOCompraTest {
 	
 	int folio = 12;
 	ArrayList<Producto> productos=new ArrayList<Producto>();

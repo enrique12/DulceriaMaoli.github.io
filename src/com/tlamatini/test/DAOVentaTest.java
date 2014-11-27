@@ -12,7 +12,7 @@ import com.tlamatini.modelo.Producto;
 import com.tlamatini.modelo.Venta;
 import com.tlamatini.persistencia.DAOVenta;
 
-public class TestDAOVenta {
+public class DAOVentaTest {
 	
 	int folio=1;
 	ArrayList<Producto> productos=new ArrayList<Producto>();;
