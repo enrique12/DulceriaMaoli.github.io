@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.LinkedList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -54,8 +56,8 @@ public class VentanaAgregarProducto extends JFrame {
 
 	private JComboBox jcomboBoxMesPexistente = new JComboBox();
 	private JComboBox jcomboBoxDiaPexistente = new JComboBox();
-	private JComboBox comboBoxProvedor = new JComboBox();
-	DefaultComboBoxModel comboBoxProv = new DefaultComboBoxModel();
+	private JComboBox jcomboBoxProvedor = new JComboBox();
+	
 	
 	private JButton jbuttonCancelarPexistente = new JButton("Cancelar");
 	private JButton jbuttonAgregarProductoPexistente = new JButton("Agregar Producto");
@@ -87,16 +89,18 @@ public class VentanaAgregarProducto extends JFrame {
 	private JLayeredPane layeredPane_1 = new JLayeredPane();
 	private JLayeredPane layeredPane = new JLayeredPane();
 	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-
+	
+	LinkedList listaProvedor=new LinkedList();
 	
 	/**
 	 * Create the frame.
 	 * @param controlAgregarProducto 
 	 */
 	public VentanaAgregarProducto(final ControlAgregarProducto con) {
+		
 		setTitle("Tlamatini");
 		this.control=con;
-
+		listaProvedor=control.dameProvedor();
 		setAlwaysOnTop(true);
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -209,7 +213,7 @@ public class VentanaAgregarProducto extends JFrame {
 						
 						Date fecha = new Date(year-1900,month,day);
 						int id_empresa = 0;
-						//id_empresa=control.dameId_empresa(comboBoxProvedor.getSelectedItem());
+						id_empresa=control.dameId_empresa(jcomboBoxProvedor.getSelectedItem());
 						Producto productoAux = new Producto(Integer.parseInt(jtextFieldClave.getText()),id_empresa,jtextFieldNombre.getText(), 
 								jtextAreaDescripcion.getText(),Double.parseDouble(jtextFieldCosto.getText()),fecha,
 								Integer.parseInt(jtextFieldCantidad.getText()),50,0);
@@ -245,13 +249,18 @@ public class VentanaAgregarProducto extends JFrame {
 		JLabel lblProvedor = new JLabel("Provedor:");
 		lblProvedor.setBounds(44, 91, 61, 14);
 		panel.add(lblProvedor);
-		/*String lista[]=control.dameProvedor();
-		comboBoxProvedor.setModel(comboBoxProv); 
-		for(int i=0;i<lista.length;i++){
-			comboBoxProv.addElement(lista[i]);
-		}*/
-		comboBoxProvedor.setBounds(169, 88, 185, 20);
-		panel.add(comboBoxProvedor);
+		
+		
+		//String lista[];
+		
+		/*String lista[]=control.dameProvedor();*/
+
+		 
+		for(int i=0;i<listaProvedor.size();i++){
+			jcomboBoxProvedor.addItem(listaProvedor.get(i));
+		}
+		jcomboBoxProvedor.setBounds(169, 88, 185, 20);
+		panel.add(jcomboBoxProvedor);
 		
 		
 

@@ -1,6 +1,9 @@
 package com.tlamatini.negocio;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
 
 import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Compra;
@@ -114,10 +117,24 @@ public class ControlAgregarProducto {
 			// TODO Auto-generated method stub
 			return daoProducto.buscaProducto(parseInt);
 		}
-		/*public String [] dameProvedor(){
-			return daoProducto.dameProvedor();
-			
-		}*/
+		
+		
+		public LinkedList dameProvedor(){
+			LinkedList listaProvedor=new LinkedList();
+			String query;
+			ResultSet rs;
+			try{
+				query="Select empresa from provedor";
+				rs=conexion.ejecutarSQLSelect(query);
+				while(rs.next()){
+					System.out.println(rs.getString("empresa"));
+					listaProvedor.add(rs.getString("empresa"));		
+				}
+			}catch(SQLException e){
+				//e.printStackTrace();
+			}
+			return listaProvedor;		
+		}
 		public int dameId_empresa(Object emp){
 			String empresa=(String)emp;
 			return daoProducto.dameId_empresa(empresa);

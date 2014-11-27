@@ -144,24 +144,7 @@ public class DAOProducto {
 	        return productos;
 		
 	}
-	/*public Proveedor[] dameProvedor(){
-		Proveedor listaProvedor[] = null;
-		int cont=0;
-		String query;
-		ResultSet rs;
-		try{
-			query="select * from provedor";
-			rs=conexion.ejecutarSQLSelect(query);
-			while(rs.next()){
-				listaProvedor[cont]=rs.getString("empresa");
-				cont++;			
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return listaProvedor;
-		
-	}*/
+	
 	public int dameId_empresa(String empresa){
 		ResultSet rs;
 		int val=-1;
