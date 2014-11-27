@@ -1,16 +1,13 @@
 package com.tlamatini.test;
-
-import static org.junit.Assert.*;
+import com.tlamatini.datos.*;
+import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList; 
-
+import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Compra;
 import com.tlamatini.modelo.Producto;
 import com.tlamatini.modelo.Venta;
@@ -19,16 +16,13 @@ import com.tlamatini.persistencia.DAOCompra;
 import com.tlamatini.persistencia.DAOVenta;
 
 public class ControlEstadoFinancieroTest {
-	int folio;
-	ArrayList<Producto> productos=new ArrayList<Producto>();
-	double importe;
-	Date fechaOperacion;
 	int  id_usuario;
 	int id_empresa;
+	ConexionDB conexion = new ConexionDB();
 
-	DAOCompra daoCompra = new DAOCompra();
-	DAOVenta daoVenta = new DAOVenta();
-	ControlEstadoFinanciero CEF = new ControlEstadoFinanciero();
+	DAOCompra daoCompra = new DAOCompra(conexion);
+	DAOVenta daoVenta = new DAOVenta(conexion);
+	ControlEstadoFinanciero CEF = new ControlEstadoFinanciero(conexion);
 	
 	private int folio = 12;
 	private ArrayList<Producto> productos=new ArrayList<Producto>();
@@ -36,7 +30,7 @@ public class ControlEstadoFinancieroTest {
 	private Date fechaOperacion= new Date(2014/02/02);
 	private String nick = "admin";
 	private String nombreProveedor = "emp";
-	Compra c = new Compra(folio, productos,importe,fechaOperacion,nick,nombreProveedor);
+	Compra c = new Compra();
 
 	Date fechaInicio = new Date(2014/01/01); 
 	Date fechaFin = new Date(2015/01/01);
@@ -48,7 +42,7 @@ public class ControlEstadoFinancieroTest {
 	private double impor = 123.5;
 	private Date fechaOper = new Date(2014/02/02);
 	private String ni = "admin";
-	Venta v = new Venta(f, prod,impor,fechaOper,ni);
+	Venta v = new Venta();
 	
 	Date fechaIni = new Date(2014/01/01); 
 	Date fechaFi = new Date(2015/01/01);

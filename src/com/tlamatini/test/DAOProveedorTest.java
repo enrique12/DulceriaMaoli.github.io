@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Proveedor;
 import com.tlamatini.persistencia.DAOProveedor;
 
@@ -13,7 +14,8 @@ public class DAOProveedorTest {
 	String empresa = "empresaJUnit";
 	String direccion = "direccionJUnit";
 	int telefono = 55555555;
-	DAOProveedor daoProveedor = new DAOProveedor();
+	ConexionDB conexion = new ConexionDB();
+	DAOProveedor daoProveedor = new DAOProveedor(conexion);
 	Proveedor proveedor = new Proveedor(empresa, direccion, telefono);
 	ArrayList<Proveedor> arrayListProveedor = daoProveedor.buscaTodos();
 
@@ -24,7 +26,7 @@ public class DAOProveedorTest {
 
 	@Test
 	public final void testBuscaProveedor() {
-		assertEquals(proveedor.getEmpresa(), daoProveedor.buscaProveedor(empresa).getEmpresa());
+		assertEquals(proveedor.getEmpresa(), daoProveedor.buscaProveedor_empresa(empresa).getEmpresa());
 	}
 
 	@Test

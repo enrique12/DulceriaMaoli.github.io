@@ -1,17 +1,18 @@
 package com.tlamatini.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Producto;
 import com.tlamatini.persistencia.DAOProducto;
 
 public class DAOProductoTest {
-	int idProducto = 13;
+	int idProducto = 12;
 	String nombre = "PruebaJUnit";
 	String descripcion = "agregaProducto y buscaProducto";
 	Date fechaCaducidad = new Date(2020/02/02); // 01:02:03;
@@ -21,9 +22,10 @@ public class DAOProductoTest {
 	String nombreProveedor = "emp";
 	int topeMayoreo = 40;
 	int mes = 1;
-	DAOProducto daoProducto = new DAOProducto();
-	Producto producto = new Producto(idProducto, nombre, descripcion, fechaCaducidad, costoUnitario, cantidad, nombreProveedor, topeMayoreo);
-	Producto producto1 = new Producto(12, nombre, descripcion, fechaCaducidad, costoUnitario, cantidad, nombreProveedor, topeMayoreo);
+	ConexionDB conexion = new ConexionDB();
+	DAOProducto daoProducto = new DAOProducto(conexion);
+	Producto producto = new Producto(idProducto, cantidad);
+	Producto producto1 = new Producto(12, cantidad);
 	Producto[] productos = daoProducto.buscaProducto("PruebaJUnit");
 	Producto[] producto2 = daoProducto.buscaProductosPorFecha(fechaCaducidad);
 	Producto[] producto3 = daoProducto.buscaProducto(nombre);
@@ -32,12 +34,12 @@ public class DAOProductoTest {
 	ArrayList<Producto> listaProductos = daoProducto.sumaProducto(listaProducto);
 
 
-/*
+
 	@Test
 	public final void testAgregaProducto() {
 		assertTrue(daoProducto.agregaProducto(producto));
 	}
-*/
+
 	@Test
 	public final void testBuscaProductoInt() {
 		assertEquals(productos.length, daoProducto.buscaProducto(producto.getNombre()).length);

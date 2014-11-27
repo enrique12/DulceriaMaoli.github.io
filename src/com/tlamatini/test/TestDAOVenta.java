@@ -7,19 +7,21 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Producto;
 import com.tlamatini.modelo.Venta;
 import com.tlamatini.persistencia.DAOVenta;
 
 public class TestDAOVenta {
 	
-	private int folio=1;
-	private ArrayList<Producto> productos=new ArrayList<Producto>();;
-	private double importe = 123.4;
-	private Date fechaOperacion = new Date(2014/02/02);
-	private String nick = "admin";
-	DAOVenta daoVenta = new DAOVenta();
-	Venta v = new Venta(folio, productos,importe,fechaOperacion,nick);
+	int folio=1;
+	ArrayList<Producto> productos=new ArrayList<Producto>();;
+	double importe = 123.4;
+	Date fechaOperacion = new Date(2014/02/02);
+	String nick = "admin";
+	ConexionDB conexion = new ConexionDB();
+	DAOVenta daoVenta = new DAOVenta(conexion);
+	Venta v = new Venta();
 	
 	Date fechaInicio = new Date(2014/01/01); 
 	Date fechaFin = new Date(2015/01/01);

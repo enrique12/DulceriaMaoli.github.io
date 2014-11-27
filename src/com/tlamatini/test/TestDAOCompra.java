@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Compra;
 import com.tlamatini.modelo.Producto;
 import com.tlamatini.modelo.Venta;
@@ -14,14 +15,16 @@ import org.junit.Test;
 
 public class TestDAOCompra {
 	
-	private int folio = 12;
-	private ArrayList<Producto> productos=new ArrayList<Producto>();
-	private double importe = 150.5;
-	private Date fechaOperacion= new Date(2014/02/02);
-	private String nick = "admin";
-	private String nombreProveedor = "emp";
-	DAOCompra daoCompra = new DAOCompra();
-	Compra c = new Compra(folio, productos,importe,fechaOperacion,nick,nombreProveedor);
+	int folio = 12;
+	ArrayList<Producto> productos=new ArrayList<Producto>();
+	double importe = 150.5;
+	Date fechaOperacion= new Date(2014/02/02);
+	String nick = "admin";
+	String nombreProveedor = "emp";
+	ConexionDB conexion = new ConexionDB();
+
+	DAOCompra daoCompra = new DAOCompra(conexion);
+	Compra c = new Compra();
 	
 	Date fechaInicio = new Date(2014/01/01); 
 	Date fechaFin = new Date(2015/01/01);
