@@ -27,7 +27,7 @@ public class ControlAdministrarProveedor {
 	}
 	
 	public Proveedor buscaProvedor(String empresa){
-		return daopreoveedor.buscaProveedor_empresa(empresa);
+		return daopreoveedor.buscaProveedor_empresa_nombre(empresa);
 	}
 	
 	public boolean elminaProveedor(Proveedor proveedor){

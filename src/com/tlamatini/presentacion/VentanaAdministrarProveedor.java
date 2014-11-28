@@ -217,10 +217,10 @@ public class VentanaAdministrarProveedor extends JFrame {
 	private void Actualiza() {
 		// TODO Auto-generated method stub
 		int i;
-		int k = control.dameTodosProveedores().size();
-		System.out.println("*******"+k);
-		i=0;
-		do{
+		int tam = control.dameTodosProveedores().size();
+		System.out.println("*******"+tam);
+		
+		for(i=0;i<tam;i++){
 			Vector datos = new Vector();
 			String Empresa = control.dameTodosProveedores().get(i).getEmpresa();
 			String Direccion= control.dameTodosProveedores().get(i).getDireccion();
@@ -229,8 +229,8 @@ public class VentanaAdministrarProveedor extends JFrame {
 			datos.add(Direccion);
 			datos.add(Telefono);
 			modelo.addRow(datos);
-			i++;
-		}while(i<k);
+			
+		}
 		
 		
 	}

@@ -78,9 +78,9 @@ public class DAOProveedor {
 		String query;
 		ResultSet rs;
 		 try {
-	            // Crea el statement
+	            // Crea el statement where NOMBRE like '%algo%'
 	            //Statement statement = ManejadorBD.dameConnection().createStatement();
-			 	query="SELECT * FROM provedor WHERE empresa='"+empresa+"'";
+			 	query="SELECT * FROM provedor where empresa like '%"+empresa+"%'";
 	            // Recibe los resutados
 	           rs = conexion.ejecutarSQLSelect(query);
 
@@ -96,6 +96,32 @@ public class DAOProveedor {
 	}
 	
 	/**
+	 * Busca en la base de datos el Proveedor de la empresa dada @param
+	 * @param empresa
+	 * @return proveedor
+	 */
+	public Proveedor buscaProveedor_empresa_nombre(String empresa) {
+		Proveedor proveedor=null;
+		String query;
+		ResultSet rs;
+		 try {
+	            
+	            //Statement statement = ManejadorBD.dameConnection().createStatement();
+			 	query="SELECT * FROM provedor where empresa like '"+empresa+"'";
+	            // Recibe los resutados
+	           rs = conexion.ejecutarSQLSelect(query);
+
+	            if(rs.next()){
+	                // Crea una nueva instancia del objeto
+	                proveedor = new Proveedor(rs.getInt("id_empresa"),rs.getString("empresa"), rs.getString("direccion"), rs.getInt("telefono"),rs.getInt("activo"));
+	                
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return proveedor;
+	}
+	/**
 	 * Modifica el proveedor en la base de datos reemplazandolo con el dado en @param
 	 * @param proveedor
 	 * @return true si hubo éxito, de lo contrario false
@@ -107,25 +133,7 @@ public class DAOProveedor {
 		 query="Update proveedor Set direccion='"+proveedor.getDireccion()+"', telefono='"+proveedor.getTelefono()+"' " +
 		 		"WHERE id_empresa='"+proveedor.getId_empresa()+"'";
 		 return conexion.ejecutarSQL(query);
-			/*try {
-				 Statement statement = ManejadorBD.dameConnection().createStatement();
-				 
-				// Recibe los resutados
-	            resultado = statement.executeUpdate("Update proveedor Set Direccion='"
-				+proveedor.getDireccion()+"' WHERE empresa='"+proveedor.getEmpresa()+"'");
-	            if(resultado==0)
-	            	return false;
-	            resultado = statement.executeUpdate("Update proveedor Set telefono="
-	            	+proveedor.getTelefono()+" WHERE telefono="+proveedor.getTelefono()+"");
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-
-	        if(resultado == 0) {
-	            return false;
-	        } else {
-	            return true;
-	        }*/
+			
 	}
 	
 	/**
@@ -136,7 +144,7 @@ public class DAOProveedor {
 	public boolean borraProveedor(Proveedor proveedor){
 		int resultado = 0;
 		String query;
-		 query="Update proveedor Set activo='"+1+"' WHERE id_empresa='"+proveedor.getId_empresa()+"'";
+		 query="Update provedor set activo='"+1+"' WHERE id_empresa='"+proveedor.getId_empresa()+"'";
 		 return conexion.ejecutarSQL(query);
         /*try {
             // Crea el statement
