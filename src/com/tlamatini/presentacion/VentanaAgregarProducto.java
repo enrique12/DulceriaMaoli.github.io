@@ -327,6 +327,17 @@ public class VentanaAgregarProducto extends JFrame {
 						jtextFieldCostoPexistente.getText()=="")
 					JOptionPane.showMessageDialog(null, "Llena los campos");
 				else{
+					int year = Integer.parseInt(jtextFieldAnioPexistente.getText());
+					int month = jcomboBoxMesPexistente.getSelectedIndex();
+					int day = jcomboBoxDiaPexistente.getSelectedIndex()+1;
+					
+					Calendar calendar = Calendar.getInstance();
+					calendar.set(Calendar.YEAR,year);
+					calendar.set(Calendar.MONTH,month);
+					int numeroDias = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+					Date fecha = new Date(year-1900,month,day);
+					//System.out.println("soy la fecga de caducidad de producto existente modificado "+fecha);
+					pExistente.setFechaCaducidad(fecha);
 					pExistente.setCostoUnitario(Double.parseDouble(jtextFieldCostoPexistente.getText()));
 					pExistente.setCantidad(Integer.parseInt(jtextFieldCantidadPexistente.getText()));
 					if(control.agregaProductoExistente(pExistente)){

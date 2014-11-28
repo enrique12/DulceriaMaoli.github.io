@@ -201,7 +201,11 @@ public class DAOProducto {
 	 */
 	public boolean modificaProducto(Producto producto) {
 		String query;
-		query="UPDATE producto set cantidad="+producto.getCantidad()+" where idProducto="+producto.getIdProducto(); 
+		
+		
+		query="UPDATE producto set costoUnitario='"+producto.getCostoUnitario()+"'" +
+				", fechaCaducidad='"+producto.getFechaCaducidad()+"', " +
+				"cantidad='"+producto.getCantidad()+"' where idProducto='"+producto.getIdProducto()+"'"; 
 			return conexion.ejecutarSQL(query);   
 	}
 	/**
