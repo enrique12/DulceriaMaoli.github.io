@@ -39,6 +39,7 @@ import com.tlamatini.negocio.ControlAdministrarInventario;
 import com.tlamatini.negocio.ControlAdministrarProveedor;
 import com.tlamatini.negocio.ControlAdministrarUsuario;
 import com.tlamatini.negocio.ControlAgregarProducto;
+import com.tlamatini.negocio.ControlCompra;
 import com.tlamatini.negocio.ControlConsultaInventario;
 import com.tlamatini.negocio.ControlEstadoFinanciero;
 import com.tlamatini.negocio.ControlMiCuenta;
@@ -97,6 +98,8 @@ public class VentanaPrincipal extends JFrame {
 	private JButton jButtonConsultarInventario = new JButton("Consultar Inventario");
 	private final Action action = new SwingAction();
 	ConexionDB conexion;
+	private JButton jbuttonRealizarCompraAdmin = new JButton("Realizar Compra");
+	private JButton jButtonRealizarCompra = new JButton("Realizar Venta");
 	/**
 	 * Create the frame.
 	 */
@@ -213,7 +216,7 @@ public class VentanaPrincipal extends JFrame {
 		        	System.exit(0);
 		        }
 		});
-		jButtonSalirAdmin.setBounds(214, 183, 125, 43);
+		jButtonSalirAdmin.setBounds(273, 183, 125, 43);
 		jButtonSalirAdmin.setVisible(false);
 		panel.add(jButtonSalirAdmin);
 		jbuttonConsultarInventarioAdmin.addActionListener(new ActionListener() {
@@ -248,11 +251,19 @@ public class VentanaPrincipal extends JFrame {
 				ControlVenta venta=new ControlVenta(control.getUser(),conexion);
 			}
 		});
-		
-	
 		jbuttonRealizarVentaAdmin.setBounds(5, 74, 124, 43);
 		jbuttonRealizarVentaAdmin.setVisible(false);
 		panel.add(jbuttonRealizarVentaAdmin);
+		
+		
+		jbuttonRealizarCompraAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ControlCompra compra=new ControlCompra(control.getUser(),conexion);
+			}
+		});
+		jbuttonRealizarCompraAdmin.setBounds(5, 184, 124, 43);
+		jbuttonRealizarCompraAdmin.setVisible(false);
+		panel.add(jbuttonRealizarCompraAdmin);
 		
 		
 		try {
@@ -341,7 +352,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		
-		jButtonFinanzasAdmin.setBounds(70, 183, 124, 43);
+		jButtonFinanzasAdmin.setBounds(139, 183, 124, 43);
 		jButtonFinanzasAdmin.setVisible(false);
 		panel.add(jButtonFinanzasAdmin);
 		jButtonRealizarVenta.addActionListener(new ActionListener() {
@@ -403,8 +414,10 @@ public class VentanaPrincipal extends JFrame {
 				jButtonConsultarInventario.setVisible(false);
 				jButtonRealizarVenta.setVisible(false);
 				jButtonProductosProximosAcaducar.setVisible(false);
-				jButtonSalir.setVisible(false);			
+				jButtonSalir.setVisible(false);	
+				jButtonRealizarCompra.setVisible(false);
 				
+				jbuttonRealizarCompraAdmin.setVisible(true);
 				jbuttonConsultarInventarioAdmin.setVisible(true);
 				jButtonAdministrarInventarioAdmin.setVisible(true);
 				jbuttonAgregarProductoAdmin.setVisible(true);
@@ -424,6 +437,7 @@ public class VentanaPrincipal extends JFrame {
 				jButtonProductosProximosAcaducar.setVisible(true);
 				jButtonSalir.setVisible(true);			
 				
+				jbuttonRealizarCompraAdmin.setVisible(false);
 				jbuttonConsultarInventarioAdmin.setVisible(false);
 				jButtonAdministrarInventarioAdmin.setVisible(false);
 				jbuttonAgregarProductoAdmin.setVisible(false);

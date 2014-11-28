@@ -150,8 +150,14 @@ public class Compra {
  	 * @param producto
  	 * @return true si se elimino correctamente o false en caso contrario
  	 */
-	public boolean removeProducto(Producto producto){
-		return productos.remove(producto);
+	public boolean removeProducto (int idProducto){
+		for(int i = 0;i<productos.size();i++){
+			if(productos.get(i).getIdProducto()==idProducto){
+				productos.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

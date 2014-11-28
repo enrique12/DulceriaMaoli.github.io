@@ -31,7 +31,7 @@ public class DAOCompra {
 			//Statement statement = ManejadorBD.dameConnection().createStatement();
 			
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave autogenerada
-			query="insert into compra(id_usuario,id_empresa,fechaOperacion,importe) values ('"+compra.getId_usuario()+"','"+compra.getId_empresa()+"','"+compra.getFechaOperacion()+"','"+compra.getImporte()+"'";
+			query="insert into compra(id_usuario,id_empresa,fechaOperacion,importe) values ('"+compra.getId_usuario()+"','"+compra.getId_empresa()+"','"+compra.getFechaOperacion()+"','"+compra.getImporte()+"')";
 			//statement.execute("insert into compra(id_usuario,id_empresa,fechaOperacion,importe) values ('"+compra.getId_usuario()+"','"+compra.getId_empresa()+"','"+compra.getFechaOperacion()+"','"+compra.getImporte()+"'");
 			if(conexion.ejecutarSQL(query)==true){
 				query="select folio from compra";
