@@ -24,12 +24,12 @@ public class DAOProveedorTest {
 	Proveedor proveedorBorrar = new Proveedor(empresa, direccion, telefono);
 	Proveedor proveedorModifica = new Proveedor(empresa, direccion, telefono);
 	ArrayList<Proveedor> arrayListProveedor = daoProveedor.buscaTodos();
-/*
+
 	@Test
 	public final void testAgregaProveedor() {
 		assertTrue(daoProveedor.agregaProveedor(proveedor));
 	}
-
+/*
 	@Test
 	public final void testBuscaProveedor() {
 		assertEquals(proveedor.getEmpresa(), daoProveedor.buscaProveedor_empresa(empresa01).getEmpresa());
@@ -49,5 +49,4 @@ public class DAOProveedorTest {
 	public final void testBuscaTodos() {
 		 assertEquals(arrayListProveedor.size(), daoProveedor.buscaTodos().size());
 	}
-
 }
