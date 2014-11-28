@@ -32,7 +32,7 @@ public class DAOVenta{
 			query="insert into venta(folio,id_usuario,fechaOperacion,importe,importeDescuento,descuento) " +
 					"values ('"+venta.getFolio()+"','"+venta.getId_usuario()+"','"+venta.getFechaOperacion()+
 	        		"','"+venta.getImporte()+"',"+venta.getImporteDescuento()+","+venta.getDescuento()+"')";
-			
+// Parece que tiene error de sintaxis SQL en query			
 			// Envia instruccion SQL, nota el DEFAULT es para insertar la llave autogenerada
 			if(conexion.ejecutarSQL(query)==true){
 				query="select folio from venta";
