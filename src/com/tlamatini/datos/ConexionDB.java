@@ -3,6 +3,7 @@ package com.tlamatini.datos;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author n3to
@@ -15,14 +16,14 @@ public class ConexionDB {
         return conexion;
     }
 /**
-* Método utilizado para establecer la conexión con la base de datos
-* @return estado regresa el estado de la conexión, true si se estableció la conexión,
+* MÃ©todo utilizado para establecer la conexiÃ³n con la base de datos
+* @return estado regresa el estado de la conexiÃ³n, true si se estableciÃ³ la conexiÃ³n,
 * falso en caso contrario
 */
     public boolean crearConexion(){
     try {
       Class.forName("com.mysql.jdbc.Driver");
-      //primero poner la base de datos (dulceria_maoli), usuario de base(root), contraseña (en mi caso no tengo solo se pone "").ALEJ
+      //primero poner la base de datos (dulceria_maoli), usuario de base(root), contraseÃ±a (en mi caso no tengo solo se pone "").ALEJ
       conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/dulceria_maoli","root","");
       System.out.println("Conexion Establecida");
       JOptionPane.showMessageDialog(null, "Conexion Establecida");
@@ -38,9 +39,9 @@ public class ConexionDB {
     }
 /**
 *
-*Método utilizado para realizar las instrucciones: INSERT, DELETE y UPDATE
-*@param sql Cadena que contiene la instrucción SQL a ejecutar
-*@return estado regresa el estado de la ejecución, true(éxito) o false(error)
+*MÃ©todo utilizado para realizar las instrucciones: INSERT, DELETE y UPDATE
+*@param sql Cadena que contiene la instrucciÃ³n SQL a ejecutar
+*@return estado regresa el estado de la ejecuciÃ³n, true(Ã©xito) o false(error)
 *
 */
     public boolean ejecutarSQL(String sql){
@@ -56,8 +57,8 @@ public class ConexionDB {
     }
 /**
 *
-*Método utilizado para realizar la instrucción SELECT
-*@param sql Cadena que contiene la instrucción SQL a ejecutar
+*MÃ©todo utilizado para realizar la instrucciÃ³n SELECT
+*@param sql Cadena que contiene la instrucciÃ³n SQL a ejecutar
 *@return resultado regresa los registros generados por la consulta
 *
 */
