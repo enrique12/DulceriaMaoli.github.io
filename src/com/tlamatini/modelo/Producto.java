@@ -185,16 +185,16 @@ public class Producto {
 	}
 
 	/**
-	 * Regresa el valor de folio
-	 * @return int folio
+	 * Regresa el valor de TopeMayoreo
+	 * @return int topeMayoreo
 	 */
 	public int getTopeMayoreo() {
 		return topeMayoreo;
 	}
 
 	/**
-	 * Cambia el valor de folio por el recibido en el parámetro
-	 * @param int folio
+	 * Cambia el valor de TopeMayoreo por el recibido en el parámetro
+	 * @param int topeMayoreo
 	 */
 	public void setTopeMayoreo(int topeMayoreo) {
 		this.topeMayoreo = topeMayoreo;

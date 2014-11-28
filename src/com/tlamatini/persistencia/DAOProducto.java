@@ -27,10 +27,11 @@ public class DAOProducto {
         // Crea el statement
        // Statement statement = ManejadorBD.dameConnection().createStatement();
         String query;
-        query="insert into producto(idProducto,id_empresa,nombre,descripcion,costoUnitario,fechaCaducidad,cantidad,topeMayoreo) " +
-				"values ('"+producto.getIdProducto()+"','"+producto.getId_empresa()+"','"+producto.getNombre()+
-        		"','"+producto.getDescripcion()+"',"+producto.getCostoUnitario()+","+producto.getFechaCaducidad()+",'"+producto.getCantidad()+",'"
-				+producto.getTopeMayoreo()+"')";
+       
+        query="insert into producto(idProducto,id_empresa,nombre,descripcion,costoUnitario,fechaCaducidad,cantidad,topeMayoreo,activo) " +
+				"values ('"+producto.getIdProducto()+"','"+producto.getId_empresa()+"','"+producto.getNombre()+"','"+producto.getDescripcion()+
+        		"','"+producto.getCostoUnitario()+"','"+producto.getFechaCaducidad()+"','"+producto.getCantidad()+"','"+producto.getTopeMayoreo()+
+        		"','"+producto.getActivo()+"')";
         return conexion.ejecutarSQL(query);
         /*statement.execute("insert into producto values ("+producto.getIdProducto()+",'"+producto.getNombre()+"','"+producto.getDescripcion()+
         		"',"+producto.getCostoUnitario()+",'"+producto.getFechaCaducidad()+"',"+producto.getCantidad()+
@@ -51,11 +52,10 @@ public class DAOProducto {
 		 try {
 	            // Crea el statement
 	            //Statement statement = ManejadorBD.dameConnection().createStatement();
-			 	query="SELECT * FROM producto WHERE idProducto="+idProducto;
+			 	query="SELECT * FROM producto WHERE idProducto='"+idProducto+"'";
 	            // Recibe los resutados
 	            rs=conexion.ejecutarSQLSelect(query);
-	            if(rs.next())
-	            {
+	            if(rs.next()){
 	                // Crea una nueva instancia del objeto
 	                producto= new Producto(rs.getInt("idProducto"),rs.getInt("id_empresa"),rs.getString("nombre"),rs.getString("descripcion"),
 	                		rs.getDouble("costoUnitario"),rs.getDate("fechaCaducidad"),rs.getInt("cantidad"),rs.getInt("topeMayoreo"),rs.getInt("activo"));

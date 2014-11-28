@@ -214,10 +214,12 @@ public class VentanaAgregarProducto extends JFrame {
 						Date fecha = new Date(year-1900,month,day);
 						int id_empresa = 0;
 						id_empresa=control.dameId_empresa(jcomboBoxProvedor.getSelectedItem());
+						System.out.println("Soy el id_empresa: "+id_empresa+" de la empresa: "+jcomboBoxProvedor.getSelectedItem());
 						Producto productoAux = new Producto(Integer.parseInt(jtextFieldClave.getText()),id_empresa,jtextFieldNombre.getText(), 
 								jtextAreaDescripcion.getText(),Double.parseDouble(jtextFieldCosto.getText()),fecha,
 								Integer.parseInt(jtextFieldCantidad.getText()),50,0);
-						System.out.println(productoAux.getNombre()+productoAux.getCostoUnitario());
+						System.out.println(productoAux.getNombre()+" "+productoAux.getCostoUnitario());
+						
 						if(control.productoEsNuevo(productoAux.getIdProducto()))
 							control.agregaProductoNuevo(productoAux);
 						else
@@ -269,12 +271,9 @@ public class VentanaAgregarProducto extends JFrame {
 		
 		
 
-		panel_1.setBounds(0, 0, 419, 349);
+		panel_1.setBounds(0, 0, 419, 393);
 		layeredPane_2.add(panel_1);
 		panel_1.setLayout(null);
-		
-		
-		
 		lblClaveDeProducto.setBounds(10, 23, 105, 14);
 		panel_1.add(lblClaveDeProducto);
 		
@@ -284,6 +283,7 @@ public class VentanaAgregarProducto extends JFrame {
 		jtextFieldClavePexistente.setBounds(125, 20, 164, 20);
 		panel_1.add(jtextFieldClavePexistente);
 		jtextFieldClavePexistente.setColumns(10);
+		jButtonBuscarPexitente.setBounds(299, 19, 110, 23);
 		jButtonBuscarPexitente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -301,59 +301,24 @@ public class VentanaAgregarProducto extends JFrame {
 				}
 			}
 		});
-
-		
-		
-		
-
-		jButtonBuscarPexitente.setBounds(299, 19, 110, 23);
 		panel_1.add(jButtonBuscarPexitente);
-
-		
-		
-
 		separator.setBounds(20, 56, 389, 2);
 		panel_1.add(separator);
-
-		
-		
-
 		label_1.setBounds(72, 75, 102, 14);
 		panel_1.add(label_1);
-
-		
-
-		label_3.setBounds(72, 100, 102, 14);
+		label_3.setBounds(72, 110, 102, 14);
 		panel_1.add(label_3);
-
-		
-
-		label_5.setBounds(72, 128, 102, 14);
+		label_5.setBounds(72, 140, 102, 14);
 		panel_1.add(label_5);
-		
-		
-		
-		
-
 		jlabelNombrePexistente.setBounds(184, 75, 105, 14);
 		panel_1.add(jlabelNombrePexistente);
-
-		
-		
-		jlabelCostoUnitarioPexistente.setBounds(184, 100, 46, 14);
+		jlabelCostoUnitarioPexistente.setBounds(184, 110, 102, 14);
 		panel_1.add(jlabelCostoUnitarioPexistente);
-
-		
-		
-
-
-		jlabelCantidadPexistente.setBounds(181, 128, 46, 14);
+		jlabelCantidadPexistente.setBounds(184, 140, 83, 14);
 		panel_1.add(jlabelCantidadPexistente);
-
-		
-
-		separator_1.setBounds(20, 153, 389, 2);
+		separator_1.setBounds(20, 165, 389, 2);
 		panel_1.add(separator_1);
+		jbuttonAgregarProductoPexistente.setBounds(51, 337, 140, 45);
 		jbuttonAgregarProductoPexistente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -375,59 +340,45 @@ public class VentanaAgregarProducto extends JFrame {
 				
 			}
 		});
-
-		
-
-		jbuttonAgregarProductoPexistente.setBounds(51, 282, 140, 45);
 		
 		jbuttonAgregarProductoPexistente.setEnabled(false);
 		
 		panel_1.add(jbuttonAgregarProductoPexistente);
-		
-		
-
-		
-		jbuttonCancelarPexistente.setBounds(211, 281, 150, 47);
+		jbuttonCancelarPexistente.setBounds(211, 336, 150, 47);
 		panel_1.add(jbuttonCancelarPexistente);
 
 		
 		jtextFieldCantidadPexistente = new JTextField();
+		jtextFieldCantidadPexistente.setBounds(176, 282, 185, 20);
 		jtextFieldCantidadPexistente.setColumns(10);
-		jtextFieldCantidadPexistente.setBounds(176, 240, 185, 20);
 		panel_1.add(jtextFieldCantidadPexistente);
+		jcomboBoxDiaPexistente.setBounds(176, 231, 46, 20);
 		
 		
 
 		jcomboBoxDiaPexistente.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		jcomboBoxDiaPexistente.setBounds(176, 203, 46, 20);
 		panel_1.add(jcomboBoxDiaPexistente);
+		jcomboBoxMesPexistente.setBounds(231, 231, 58, 20);
 		
 		
 		
 		jcomboBoxMesPexistente.setModel(new DefaultComboBoxModel(new String[] {"ENE", "FEB", "MAR ", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"}));
-		jcomboBoxMesPexistente.setBounds(232, 203, 58, 20);
 		panel_1.add(jcomboBoxMesPexistente);
 		
 
 		jtextFieldAnioPexistente = new JTextField();
+		jtextFieldAnioPexistente.setBounds(300, 231, 61, 20);
 		jtextFieldAnioPexistente.setColumns(10);
-		jtextFieldAnioPexistente.setBounds(300, 203, 61, 20);
 		panel_1.add(jtextFieldAnioPexistente);
-
-
-		label_4.setBounds(51, 206, 130, 14);
+		label_4.setBounds(51, 234, 130, 14);
 		panel_1.add(label_4);
-		
-		
-		label_6.setBounds(51, 243, 102, 14);
+		label_6.setBounds(52, 285, 102, 14);
 		panel_1.add(label_6);
-		
-		
-		lblCostoUnitario_1.setBounds(51, 175, 123, 14);
+		lblCostoUnitario_1.setBounds(51, 192, 123, 14);
 		panel_1.add(lblCostoUnitario_1);
 		
 		jtextFieldCostoPexistente = new JTextField();
-		jtextFieldCostoPexistente.setBounds(176, 172, 185, 20);
+		jtextFieldCostoPexistente.setBounds(176, 189, 185, 20);
 		panel_1.add(jtextFieldCostoPexistente);
 		jtextFieldCostoPexistente.setColumns(10);
 		

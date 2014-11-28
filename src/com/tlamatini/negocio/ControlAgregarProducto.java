@@ -127,7 +127,7 @@ public class ControlAgregarProducto {
 				query="Select empresa from provedor";
 				rs=conexion.ejecutarSQLSelect(query);
 				while(rs.next()){
-					System.out.println(rs.getString("empresa"));
+					//System.out.println(rs.getString("empresa"));
 					listaProvedor.add(rs.getString("empresa"));		
 				}
 			}catch(SQLException e){
