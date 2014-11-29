@@ -12,7 +12,7 @@ import com.tlamatini.modelo.Producto;
 import com.tlamatini.persistencia.DAOProducto;
 
 public class DAOProductoTest {
-	int idProducto = 3;
+	int idProducto = 2;
 	String nombre = "PruebaJUnit";
 	String descripcion = "agregaProducto y buscaProducto";
 	Date fechaCaducidad = new Date(2020/02/02); // 01:02:03;
@@ -37,7 +37,7 @@ public class DAOProductoTest {
 	ArrayList<Producto> listaProductos = daoProducto.sumaProducto(listaProducto);
 
 
-
+/*
 	@Test
 	public final void testAgregaProducto() {
 		assertTrue(daoProducto.agregaProducto(producto));
@@ -63,12 +63,12 @@ public class DAOProductoTest {
 		assertEquals(producto3.length, daoProducto.buscaProducto(nombre).length);
 	}
 
-/*
+*/
 	@Test
 	public final void testBorraProducto() {
 		assertTrue(daoProducto.borraProducto(producto));
 	}
-*/
+
 	@Test
 	public final void testMasVendido() {
 		assertEquals(producto4.length, daoProducto.masVendido(mes).length);
