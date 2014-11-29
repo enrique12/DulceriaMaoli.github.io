@@ -124,7 +124,7 @@ public class DAOUsuario{
 	            // Crea el statement
 	          //  Statement statement = ManejadorBD.dameConnection().createStatement();
 	            
-		 query="DELETE FROM usuario WHERE nick='"+usuario.getNick()+"')";
+		 query="DELETE FROM usuario WHERE nick='"+usuario.getNick()+"'";
 		 return conexion.ejecutarSQL(query);
 	            // Recibe los resutados
 	            /*resultado = statement.executeUpdate("DELETE FROM usuario WHERE nick='"+usuario.getNick()+"')");
