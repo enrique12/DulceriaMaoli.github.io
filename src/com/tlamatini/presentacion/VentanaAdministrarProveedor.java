@@ -34,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.ListSelectionModel;
 
 
 
@@ -41,15 +42,14 @@ public class VentanaAdministrarProveedor extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField jtextFieldNombre;
-	private JTable jtableProvedores;
 	private DAOProveedor daoprovedor;
+	private JButton jButtonMuestraTodos = new JButton("Mostrar Todos");
 	private JButton jButtonAceptar = new JButton("Aceptar");
 	private JButton jButtonAgregar = new JButton("Agregar");
 	private JButton jButtonBorrar = new JButton("Eliminar");
 	private JLabel lblProvedores = new JLabel("Provedores:");
 	private JSeparator separator = new JSeparator();
 	private JButton jButtonBuscar = new JButton("Buscar");
-	private JButton jButtonMuestraTodos = new JButton("Muestra Todos");
 	private JLabel lblClave = new JLabel("Empresa:");
 	private JLabel jlabelUsuario = new JLabel("Admin");
 	private JLabel lblUsuario = new JLabel("Usuario:");
@@ -60,6 +60,8 @@ public class VentanaAdministrarProveedor extends JFrame {
 	private ControlAdministrarProveedor control;
 	private ControlModificaProveedor controModifica;
 	ConexionDB conexion;
+	private final JScrollPane scrollPane = new JScrollPane();
+	private final JTable jtableProvedores = new JTable();
 
 	/**
 	 * Create the frame.
@@ -74,7 +76,7 @@ public class VentanaAdministrarProveedor extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		setAlwaysOnTop(true);
-		setBounds(100, 100, 450, 446);
+		setBounds(100, 100, 450, 488);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Administrar Provedores", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
@@ -82,19 +84,16 @@ public class VentanaAdministrarProveedor extends JFrame {
 		
 
 
-		panel.setBounds(10, 22, 414, 387);
+		panel.setBounds(10, 22, 414, 432);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		lblUsuario.setBounds(230, 11, 99, 14);
 		
 
 		lblUsuario.setIcon(new ImageIcon("C:\\Users\\Azhala\\Documents\\EclipseProyectos\\Proyecto\\iconos\\user.png"));
-		lblUsuario.setBounds(230, 11, 99, 14);
 		panel.add(lblUsuario);
-		
-
 		jlabelUsuario.setBounds(320, 11, 84, 14);
 		panel.add(jlabelUsuario);
-		
 		lblClave.setBounds(45, 41, 66, 14);
 		panel.add(lblClave);
 		
@@ -102,18 +101,11 @@ public class VentanaAdministrarProveedor extends JFrame {
 		jtextFieldNombre.setBounds(101, 38, 132, 20);
 		panel.add(jtextFieldNombre);
 		jtextFieldNombre.setColumns(10);
-
 		jButtonBuscar.setBounds(244, 36, 143, 23);
 		panel.add(jButtonBuscar);
-		
-		jButtonMuestraTodos.setBounds(244,65,143,23);
-		panel.add(jButtonMuestraTodos);
-
-		separator.setBounds(10, 92, 394, 2);
+		separator.setBounds(10, 107, 394, 2);
 		panel.add(separator);
-		
-
-		lblProvedores.setBounds(10, 93, 91, 14);
+		lblProvedores.setBounds(10, 113, 91, 14);
 		panel.add(lblProvedores);
 		
 		titulo.add("Empresa");
@@ -124,26 +116,66 @@ public class VentanaAdministrarProveedor extends JFrame {
 				return false;
 				}
 		};
-		jtableProvedores = new JTable(modelo);
-		jtableProvedores.getTableHeader().setReorderingAllowed(false);
-		//Actualiza();
-		
-		
-		jtableProvedores.setBounds(10, 114, 394, 205);
-		panel.add(jtableProvedores);
-		
-		
-
-		jButtonBorrar.setBounds(10, 338, 89, 35);
-		panel.add(jButtonBorrar);		
-		
-		
-		jButtonAgregar.setBounds(155, 338, 89, 35);
+		jButtonBorrar.setBounds(10, 386, 89, 35);
+		panel.add(jButtonBorrar);
+		jButtonAgregar.setBounds(149, 386, 89, 35);
 		panel.add(jButtonAgregar);
-		
-		
-		jButtonAceptar.setBounds(290, 338, 89, 35);
+		jButtonAceptar.setBounds(281, 386, 89, 35);
 		panel.add(jButtonAceptar);
+		jButtonMuestraTodos.setBounds(244, 70, 143, 23);
+		panel.add(jButtonMuestraTodos);
+		scrollPane.setBounds(10, 138, 394, 237);
+		
+		panel.add(scrollPane);
+		jtableProvedores.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"Nombre", "Direccion", "Telefono"
+			}
+		));
+		
+		scrollPane.setViewportView(jtableProvedores);
+		
+		
+		jButtonMuestraTodos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Actualiza1();
+				
+			}
+		});
+		
 		
 		jButtonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -169,12 +201,6 @@ public class VentanaAdministrarProveedor extends JFrame {
 					}else
 						JOptionPane.showMessageDialog(null, "No existe el provedor");
 				}
-			}
-		});
-		
-		jButtonMuestraTodos.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Actualiza();
 			}
 		});
 		
@@ -214,7 +240,7 @@ public class VentanaAdministrarProveedor extends JFrame {
 	}
 
 
-	private void Actualiza() {
+	private void Actualiza1() {
 		// TODO Auto-generated method stub
 		int i;
 		int tam = control.dameTodosProveedores().size();
