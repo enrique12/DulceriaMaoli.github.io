@@ -239,6 +239,7 @@ public class VentanaAdministrarProveedor extends JFrame {
 	
 	}
 
+	
 
 	private void actualiza1(ArrayList<Proveedor> mostrar) {
 		// TODO Auto-generated method stub

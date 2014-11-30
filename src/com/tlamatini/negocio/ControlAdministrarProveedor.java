@@ -9,6 +9,7 @@ import com.tlamatini.persistencia.DAOProveedor;
 import com.tlamatini.presentacion.VentanaAdministrarProveedor;
 import com.tlamatini.presentacion.VentanaAgregarProveedor;
 
+
 public class ControlAdministrarProveedor {
 	private Usuario loggedIn;
 	private ControlAgregaProveedor nuevo;

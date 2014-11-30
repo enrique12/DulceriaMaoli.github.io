@@ -15,6 +15,7 @@ public class ControlModificaProveedor {
 		this.daoprovedor = daoprovedor;		
 	}
 	
+	
 	public void inicia(){
 		VentanaModificaProveedor ventana = new VentanaModificaProveedor(conexion);
 		ventana.setVisible(true);

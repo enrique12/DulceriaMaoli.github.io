@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+
 public class VentanaAgregarProveedor extends JFrame {
 	private Usuario usuario;
 	private Proveedor proveedor;

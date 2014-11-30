@@ -23,6 +23,7 @@ public class ControlAgregaProveedor {
 		this.loggedIn = loggedIn;
 	}
 	
+	
 	public void inicia(){
 		 ventana = new VentanaAgregarProveedor(conexion);
 		ventana.setVisible(true);
