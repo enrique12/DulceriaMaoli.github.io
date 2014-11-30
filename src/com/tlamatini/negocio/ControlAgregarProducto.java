@@ -55,6 +55,7 @@ public class ControlAgregarProducto {
 		public boolean agregaProductoExistente(Producto producto){
 			Producto productoAux=null;
 			productoAux=daoProducto.buscaProducto(producto.getIdProducto());
+			productoAux.setActivo(producto.getActivo());
 			productoAux.setFechaCaducidad(producto.getFechaCaducidad());
 			productoAux.setCantidad(productoAux.getCantidad()+producto.getCantidad());
 			productoAux.setCostoUnitario(producto.getCostoUnitario());

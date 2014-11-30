@@ -24,8 +24,6 @@ public class DAOProducto {
 	 * @return true si es exitoso, de otra manera false.
 	 */
 	public boolean agregaProducto(Producto producto) {
-        // Crea el statement
-       // Statement statement = ManejadorBD.dameConnection().createStatement();
         String query;
        
         query="insert into producto(idProducto,id_empresa,nombre,descripcion,costoUnitario,fechaCaducidad,cantidad,topeMayoreo,activo) " +
@@ -33,11 +31,6 @@ public class DAOProducto {
         		"','"+producto.getCostoUnitario()+"','"+producto.getFechaCaducidad()+"','"+producto.getCantidad()+"','"+producto.getTopeMayoreo()+
         		"','"+producto.getActivo()+"')";
         return conexion.ejecutarSQL(query);
-        /*statement.execute("insert into producto values ("+producto.getIdProducto()+",'"+producto.getNombre()+"','"+producto.getDescripcion()+
-        		"',"+producto.getCostoUnitario()+",'"+producto.getFechaCaducidad()+"',"+producto.getCantidad()+
-        		",'"+producto.getNombreProveedor()+"',"+producto.getTopeMayoreo()+")");
-     */
-       
 	}
 	
 	/**
@@ -50,13 +43,9 @@ public class DAOProducto {
 		ResultSet rs;
 		String query;
 		 try {
-	            // Crea el statement
-	            //Statement statement = ManejadorBD.dameConnection().createStatement();
 			 	query="SELECT * FROM producto WHERE idProducto='"+idProducto+"'";
-	            // Recibe los resutados
 	            rs=conexion.ejecutarSQLSelect(query);
 	            if(rs.next()){
-	                // Crea una nueva instancia del objeto
 	                producto= new Producto(rs.getInt("idProducto"),rs.getInt("id_empresa"),rs.getString("nombre"),rs.getString("descripcion"),
 	                		rs.getDouble("costoUnitario"),rs.getDate("fechaCaducidad"),rs.getInt("cantidad"),rs.getInt("topeMayoreo"),rs.getInt("activo"));
 	            }
@@ -203,7 +192,7 @@ public class DAOProducto {
 		String query;
 		
 		
-		query="UPDATE producto set costoUnitario='"+producto.getCostoUnitario()+"'" +
+		query="UPDATE producto set activo='"+producto.getActivo()+"', costoUnitario='"+producto.getCostoUnitario()+"'" +
 				", fechaCaducidad='"+producto.getFechaCaducidad()+"', " +
 				"cantidad='"+producto.getCantidad()+"' where idProducto='"+producto.getIdProducto()+"'"; 
 			return conexion.ejecutarSQL(query);   
@@ -215,7 +204,7 @@ public class DAOProducto {
 	 */
 	public boolean borraProducto(Producto producto){
 		String query;
-        query="UPDATE producto set activo="+1+" where idProducto="+producto.getIdProducto();
+        query="UPDATE producto set activo="+1+",cantidad="+0+" where idProducto="+producto.getIdProducto();
         
         return conexion.ejecutarSQL(query);
         

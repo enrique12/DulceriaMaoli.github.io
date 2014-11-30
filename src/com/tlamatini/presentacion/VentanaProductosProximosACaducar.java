@@ -121,6 +121,7 @@ public class VentanaProductosProximosACaducar extends JFrame {
 		panel.add(jcomboBoxMes);
 		jButtonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int cont=0;
 				if(jtextFieldAnio.getText().equals("")){
 					JOptionPane.showMessageDialog(null, "ingrese el anio");
 				}
@@ -154,9 +155,12 @@ public class VentanaProductosProximosACaducar extends JFrame {
 					
 					//llena tabla
 					for(int i=0;i<productos.length;i++){
-						System.out.println(productos[i].getNombre());
-						model.insertRow(i,new Object[]{productos[i].getIdProducto(),productos[i].getNombre(),productos[i].getDescripcion(),productos[i].getCantidad(),productos[i].getFechaCaducidad(),productos[i].getNombreProveedor() } );
-					
+						if(productos[i].getActivo()==0){
+							System.out.println(productos[i].getNombre());
+							model.insertRow(cont,new Object[]{productos[i].getIdProducto(),productos[i].getNombre(),productos[i].getDescripcion(),productos[i].getCantidad(),productos[i].getFechaCaducidad(),productos[i].getNombreProveedor() } );
+							cont++;
+						}
+						
 					}
 					
 				}

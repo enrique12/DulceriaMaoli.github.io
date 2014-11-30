@@ -33,8 +33,7 @@ public class ControlConsultaInventario {
 	}
 	
 	public  boolean borrarProducto(Producto producto){
-		boolean aux=daoProducto.borraProducto(producto);
-		return aux;
+		return daoProducto.borraProducto(producto);
 	}
 	
 	public Producto dameProducto(int idProducto){

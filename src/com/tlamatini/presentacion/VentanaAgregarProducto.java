@@ -189,13 +189,10 @@ public class VentanaAgregarProducto extends JFrame {
 		jButtonAgregarProductoSolo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 								
-				if( (jtextFieldClave.getText()=="" | jtextFieldNombre.getText()=="" | jtextFieldCosto.getText()=="" | 
-					jtextFieldAnio.getText()=="" |  jtextFieldCantidad.getText()=="")){
-					
-
+				if( (jtextFieldClave.getText().equals("") || jtextFieldNombre.getText().equals("") || jtextFieldCosto.getText().equals("") || 
+					jtextFieldAnio.getText().equals("") ||  jtextFieldCantidad.getText().equals(""))){
 					JOptionPane.showMessageDialog(null, "Llena todos los campos");
-				}
-				else{
+				}else{
 
 					int year = Integer.parseInt(jtextFieldAnio.getText());
 					int month = jcomboBoxMes.getSelectedIndex();
@@ -287,18 +284,27 @@ public class VentanaAgregarProducto extends JFrame {
 		jButtonBuscarPexitente.setBounds(299, 19, 110, 23);
 		jButtonBuscarPexitente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				pExistente=control.buscaProducto(Integer.parseInt(jtextFieldClavePexistente.getText()));
-				if(pExistente==null)
-					JOptionPane.showMessageDialog(null, "No existe ese Producto");
-				else{
-
-					jlabelCantidadPexistente.setText(""+pExistente.getCantidad());
-					jlabelCostoUnitarioPexistente.setText(""+pExistente.getCostoUnitario());
-					jlabelNombrePexistente.setText(pExistente.getNombre());
-					
-					jbuttonAgregarProductoPexistente.setEnabled(true);
-					
+				if(!jtextFieldClavePexistente.getText().equals("")){
+					pExistente=control.buscaProducto(Integer.parseInt(jtextFieldClavePexistente.getText()));
+					if(pExistente==null){
+						JOptionPane.showMessageDialog(null, "No existe ese Producto");
+					}else{
+						if(pExistente.getActivo()==1){
+							JOptionPane.showMessageDialog(null, "Se encontro historial de producto no existente, se agregara el producto");
+							jlabelCantidadPexistente.setText(""+pExistente.getCantidad());
+							jlabelCostoUnitarioPexistente.setText(""+pExistente.getCostoUnitario());
+							jlabelNombrePexistente.setText(pExistente.getNombre());
+							jbuttonAgregarProductoPexistente.setEnabled(true);
+						}else{
+							JOptionPane.showMessageDialog(null, "Se encontro producto existente");
+							jlabelCantidadPexistente.setText(""+pExistente.getCantidad());
+							jlabelCostoUnitarioPexistente.setText(""+pExistente.getCostoUnitario());
+							jlabelNombrePexistente.setText(pExistente.getNombre());
+							jbuttonAgregarProductoPexistente.setEnabled(true);
+						}
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "Ingregese un producto para buscar");
 				}
 			}
 		});
@@ -324,10 +330,10 @@ public class VentanaAgregarProducto extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			
 
-				if(jtextFieldCantidadPexistente.getText()==""^jtextFieldAnioPexistente.getText()=="" ^
-						jtextFieldCostoPexistente.getText()=="")
+				if(jtextFieldCantidadPexistente.getText().equals("") || jtextFieldAnioPexistente.getText().equals("") ||
+						jtextFieldCostoPexistente.getText().equals("")){
 					JOptionPane.showMessageDialog(null, "Llena los campos");
-				else{
+				}else{
 					int year = Integer.parseInt(jtextFieldAnioPexistente.getText());
 					int month = jcomboBoxMesPexistente.getSelectedIndex();
 					int day = jcomboBoxDiaPexistente.getSelectedIndex()+1;
@@ -338,6 +344,7 @@ public class VentanaAgregarProducto extends JFrame {
 					int numeroDias = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 					Date fecha = new Date(year-1900,month,day);
 					//System.out.println("soy la fecga de caducidad de producto existente modificado "+fecha);
+					pExistente.setActivo(0);
 					pExistente.setFechaCaducidad(fecha);
 					pExistente.setCostoUnitario(Double.parseDouble(jtextFieldCostoPexistente.getText()));
 					pExistente.setCantidad(Integer.parseInt(jtextFieldCantidadPexistente.getText()));

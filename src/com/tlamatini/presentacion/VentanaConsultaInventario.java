@@ -41,15 +41,17 @@ public class VentanaConsultaInventario extends JFrame {
 	private JLabel lblUsuario = new JLabel("Usuario:");
 	private JPanel panel = new JPanel();
 	private JButton btnEliminar = new JButton("Eliminar");
-	private Producto[] mostrar;
+	private Producto[] productos;
 	private Producto borrar = new Producto();
 	private final JScrollPane scrollPane = new JScrollPane();
-
+	ControlConsultaInventario control;
 	/**
 	 * Create the frame.
 	 * @param control 
 	 */
-	public VentanaConsultaInventario(final ControlConsultaInventario control) {
+	public VentanaConsultaInventario(final ControlConsultaInventario contr) {
+		
+		control=contr;
 		lblAdmin.setText(control.getUser().getNick());
 		setTitle("Tlamatini");
 		setType(Type.UTILITY);
@@ -140,10 +142,11 @@ public class VentanaConsultaInventario extends JFrame {
 		
 		jButtonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				clearTable();
+				//clearTable();
 				String busca=jtextFieldClave.getText();
-				mostrar=control.dameProductos(busca);
-				for(int i=0;i<mostrar.length;i++){
+				productos=control.dameProductos(busca);
+				actualiza(productos);
+				/*for(int i=0;i<mostrar.length;i++){
 					String precio=""+mostrar[i].getCostoUnitario()*1.15;
 					BigDecimal dosDecimales=new BigDecimal(precio);
 					dosDecimales=dosDecimales.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -154,15 +157,16 @@ public class VentanaConsultaInventario extends JFrame {
 					jtableProductos.setValueAt(mostrar[i].getFechaCaducidad(), i, 3);
 					jtableProductos.setValueAt(mostrar[i].getCantidad(), i, 4);
 					jtableProductos.setValueAt("$ "+dosDecimales, i, 5);
-				}
+				}*/
 			}
 		});
 		
 		jButtonMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				clearTable();
-				mostrar=control.dameProductos();
-				for(int i=0;i<mostrar.length;i++){
+				//clearTable();
+				productos=control.dameProductos();
+				actualiza(productos);
+				/*for(int i=0;i<mostrar.length;i++){
 					String precio=""+mostrar[i].getCostoUnitario()*1.15;
 					BigDecimal dosDecimales=new BigDecimal(precio);
 					dosDecimales=dosDecimales.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -173,7 +177,7 @@ public class VentanaConsultaInventario extends JFrame {
 					jtableProductos.setValueAt(mostrar[i].getFechaCaducidad(), i, 3);
 					jtableProductos.setValueAt(mostrar[i].getCantidad(), i, 4);
 					jtableProductos.setValueAt("$ "+dosDecimales, i, 5);
-				}
+				}*/
 			}
 		});
 		
@@ -203,6 +207,27 @@ public class VentanaConsultaInventario extends JFrame {
 				dispose();
 			}
 		});
+	}
+	public void actualiza(Producto[] mostrar){
+		int cont=0;
+		clearTable();
+		//mostrar=control.dameProductos();
+		for(int i=0;i<mostrar.length;i++){
+			if(productos[i].getActivo()==0){
+				String precio=""+mostrar[i].getCostoUnitario()*1.15;
+				BigDecimal dosDecimales=new BigDecimal(precio);
+				dosDecimales=dosDecimales.setScale(2, BigDecimal.ROUND_HALF_UP);
+				System.out.println(mostrar[i].getNombre());
+				jtableProductos.setValueAt(mostrar[i].getIdProducto(), cont, 0);
+				jtableProductos.setValueAt(mostrar[i].getNombre(), cont, 1);
+				jtableProductos.setValueAt(mostrar[i].getDescripcion(), cont, 2);
+				jtableProductos.setValueAt(mostrar[i].getFechaCaducidad(), cont, 3);
+				jtableProductos.setValueAt(mostrar[i].getCantidad(), cont, 4);
+				jtableProductos.setValueAt("$ "+dosDecimales, cont, 5);
+				cont++;
+			}
+		}
+		
 	}
 	public void clearTable() {
 		   for (int i = 0; i < jtableProductos.getRowCount(); i++)
