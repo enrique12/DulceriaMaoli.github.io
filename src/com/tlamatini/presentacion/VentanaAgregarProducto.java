@@ -101,6 +101,7 @@ public class VentanaAgregarProducto extends JFrame {
 		setTitle("Tlamatini");
 		this.control=con;
 		listaProvedor=control.dameProvedor();
+		
 		setAlwaysOnTop(true);
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -398,7 +399,8 @@ public class VentanaAgregarProducto extends JFrame {
 		lblUsuario.setBounds(284, 11, 75, 14);
 		contentPane.add(lblUsuario);
 		
-		JLabel jlabelUsuario = new JLabel("admin");
+		JLabel jlabelUsuario = new JLabel();
+		jlabelUsuario.setText(control.getLoggedIn().getNick());
 		jlabelUsuario.setBounds(359, 11, 75, 14);
 		contentPane.add(jlabelUsuario);
 		

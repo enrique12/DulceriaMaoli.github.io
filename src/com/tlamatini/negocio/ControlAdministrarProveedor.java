@@ -12,19 +12,25 @@ import com.tlamatini.presentacion.VentanaAgregarProveedor;
 
 public class ControlAdministrarProveedor {
 	private Usuario loggedIn;
-	private ControlAgregaProveedor nuevo;
+	private ControlAgregaProveedor nuevoProvedor;
+	private ControlModificaProveedor modificaProvedor;
 	private DAOProveedor daopreoveedor;
 	ConexionDB conexion;
-	public ControlAdministrarProveedor(ConexionDB con){
+	public ControlAdministrarProveedor(Usuario usuario,ConexionDB con){
 		conexion=con;
+		loggedIn=usuario;
 		daopreoveedor = new DAOProveedor(conexion);
-		nuevo = new ControlAgregaProveedor(loggedIn,conexion);
+		nuevoProvedor = new ControlAgregaProveedor(loggedIn,conexion);
+		modificaProvedor = new ControlModificaProveedor(loggedIn,conexion);
 		VentanaAdministrarProveedor ventana=new VentanaAdministrarProveedor(this,conexion);
 		ventana.setVisible(true);
 		
 	}
+	public Usuario getLoggedIn() {
+		return loggedIn;
+	}
 	public void nuevoProveedor(){
-		nuevo.inicia();
+		nuevoProvedor.inicia();
 	}
 	
 	/**
@@ -57,8 +63,9 @@ public class ControlAdministrarProveedor {
 	public boolean elminaProveedor(Proveedor proveedor){
 		return daopreoveedor.borraProveedor(proveedor);
 	}
-	public boolean modificaProveedor(){
-		return true;
+	public void modificaProveedor(Proveedor provedor){
+		
+		modificaProvedor.inicia(provedor);
 	}
 	public ArrayList<Proveedor> dameTodosProveedores(){
 		return daopreoveedor.buscaTodos();		

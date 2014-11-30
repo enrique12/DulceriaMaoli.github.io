@@ -52,7 +52,7 @@ public class VentanaAdministrarProveedor extends JFrame {
 	private JSeparator separator = new JSeparator();
 	private JButton jButtonBuscar = new JButton("Buscar");
 	private JLabel lblClave = new JLabel("Empresa:");
-	private JLabel jlabelUsuario = new JLabel("Admin");
+	private JLabel jlabelUsuario = new JLabel();
 	private JLabel lblUsuario = new JLabel("Usuario:");
 	private JPanel panel = new JPanel();
 	private DefaultTableModel modelo;
@@ -72,6 +72,7 @@ public class VentanaAdministrarProveedor extends JFrame {
 		conexion=con;
 		daoprovedor=new DAOProveedor(conexion);
 		this.control = control;
+		jlabelUsuario.setText(control.getLoggedIn().getNick());
 		setTitle("Tlamatini");
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -117,11 +118,11 @@ public class VentanaAdministrarProveedor extends JFrame {
 				return false;
 				}
 		};
-		jButtonBorrar.setBounds(10, 386, 89, 35);
+		jButtonBorrar.setBounds(315, 386, 89, 35);
 		panel.add(jButtonBorrar);
-		jButtonAgregar.setBounds(149, 386, 89, 35);
+		jButtonAgregar.setBounds(119, 386, 89, 35);
 		panel.add(jButtonAgregar);
-		jButtonAceptar.setBounds(281, 386, 89, 35);
+		jButtonAceptar.setBounds(20, 386, 89, 35);
 		panel.add(jButtonAceptar);
 		jButtonMuestraTodos.setBounds(244, 70, 143, 23);
 		panel.add(jButtonMuestraTodos);
@@ -168,6 +169,32 @@ public class VentanaAdministrarProveedor extends JFrame {
 		
 		scrollPane.setViewportView(jtableProvedores);
 		
+		JButton jButtonModifica = new JButton("Modificar");
+		jButtonModifica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Proveedor provedor;
+				ArrayList<Proveedor> listaProveedor;
+				if(jtableProvedores.getSelectedRow()==-1){
+					JOptionPane.showMessageDialog(null, "Debes seleccionar un campo");
+				}else{
+					provedor=control.buscaProvedor_nombre((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0));
+					control.modificaProveedor(provedor);
+				    /* if(control.elminaProveedor(control.buscaProvedor_nombre((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0)))){
+						JOptionPane.showMessageDialog(null, "Se elimino el Proveedor");
+				     } else{
+				    	JOptionPane.showMessageDialog(null, "Error: No se elimino el proveedor");
+				     }*/
+				     listaProveedor=control.dameTodosProveedores();
+				     actualiza1(listaProveedor);
+				    
+				}
+				
+				
+			}
+		});
+		jButtonModifica.setBounds(218, 386, 89, 35);
+		panel.add(jButtonModifica);
+		
 		
 		jButtonMuestraTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -202,16 +229,13 @@ public class VentanaAdministrarProveedor extends JFrame {
 		
 		jButtonAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ArrayList<Proveedor> listaProveedor;
 				control.nuevoProveedor();
+				listaProveedor=control.dameTodosProveedores();
+			    actualiza1(listaProveedor);
 			}
 		});
-		/*jButtonModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controModifica = new ControlModificaProveedor(daoprovedor);
-				controModifica.inicia();
-				
-			}
-		});*/
+
 		
 		jButtonBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -239,7 +263,6 @@ public class VentanaAdministrarProveedor extends JFrame {
 	
 	}
 
-	
 
 	private void actualiza1(ArrayList<Proveedor> mostrar) {
 		// TODO Auto-generated method stub

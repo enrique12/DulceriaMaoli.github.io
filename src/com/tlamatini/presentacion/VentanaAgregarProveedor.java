@@ -47,7 +47,7 @@ public class VentanaAgregarProveedor extends JFrame {
 	private JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
 	private JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 	private JLabel lblEmpresa = new JLabel("Empresa:");
-	private JLabel jLabelUsuario;
+	private JLabel jLabelUsuario= new JLabel();;
 	private JLabel lblUsuario = new JLabel("Usuario:");
 	private JPanel panel = new JPanel();
 	
@@ -58,12 +58,13 @@ public class VentanaAgregarProveedor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAgregarProveedor(ConexionDB con) {
+	public VentanaAgregarProveedor(ControlAgregaProveedor cont,ConexionDB con) {
 		conexion=con;
-		control = new ControlAgregaProveedor(usuario,conexion);
+		control=cont;
 		setTitle("Tlamatini");
 		setType(Type.UTILITY);
-
+		
+		
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 368, 343);
@@ -81,7 +82,7 @@ public class VentanaAgregarProveedor extends JFrame {
 		lblUsuario.setIcon(new ImageIcon("C:\\Users\\Azhala\\Documents\\EclipseProyectos\\Proyecto\\iconos\\user.png"));
 		lblUsuario.setBounds(195, 11, 90, 14);
 		panel.add(lblUsuario);
-		jLabelUsuario= new JLabel("Admin");
+		jLabelUsuario.setText(control.getLoggedIn().getNick());
 		jLabelUsuario.setBounds(267, 11, 69, 14);
 		panel.add(jLabelUsuario);
 

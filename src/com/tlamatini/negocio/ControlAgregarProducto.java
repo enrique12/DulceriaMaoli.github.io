@@ -8,12 +8,9 @@ import java.util.LinkedList;
 import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Compra;
 import com.tlamatini.modelo.Producto;
-import com.tlamatini.modelo.Proveedor;
 import com.tlamatini.modelo.Usuario;
-import com.tlamatini.modelo.Venta;
 import com.tlamatini.persistencia.DAOCompra;
 import com.tlamatini.persistencia.DAOProducto;
-import com.tlamatini.persistencia.DAOProveedor;
 import com.tlamatini.presentacion.VentanaAgregarProducto;
 
 
@@ -34,6 +31,12 @@ public class ControlAgregarProducto {
 		daoProducto=new DAOProducto(conexion);
 	}
 	
+	
+		public Usuario getLoggedIn() {
+		return loggedIn;
+	}
+
+
 		public boolean productoEsNuevo(int idProducto){
 			if(daoProducto.buscaProducto(idProducto)==null)
 				return true;

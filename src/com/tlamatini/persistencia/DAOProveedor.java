@@ -145,7 +145,7 @@ public class DAOProveedor {
 
 		 int resultado = 0;
 		 String query;
-		 query="Update proveedor Set direccion='"+proveedor.getDireccion()+"', telefono='"+proveedor.getTelefono()+"' " +
+		 query="Update provedor Set direccion='"+proveedor.getDireccion()+"', telefono='"+proveedor.getTelefono()+"' " +
 		 		"WHERE id_empresa='"+proveedor.getId_empresa()+"'";
 		 return conexion.ejecutarSQL(query);
 			

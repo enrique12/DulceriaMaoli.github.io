@@ -18,8 +18,14 @@ public class ControlAdministrarUsuario {
 		
 	}
 	
+	
+	public Usuario getLoggedIn() {
+		return loggedIn;
+	}
+
+
 	public void inicia(){
-		VentanaAdministrarUsuario ventana=new VentanaAdministrarUsuario(conexion);
+		VentanaAdministrarUsuario ventana=new VentanaAdministrarUsuario(this,conexion);
 		ventana.setVisible(true);
 	}
 	

@@ -24,9 +24,15 @@ public class ControlAgregaProveedor {
 	}
 	
 	
+
+
 	public void inicia(){
-		 ventana = new VentanaAgregarProveedor(conexion);
+		ventana = new VentanaAgregarProveedor(this,conexion);
 		ventana.setVisible(true);
+	}
+
+	public Usuario getLoggedIn() {
+		return loggedIn;
 	}
 	
 	public boolean agregarProveedor(Proveedor proveedor){
