@@ -231,6 +231,7 @@ public class VentanaAdministrarProveedor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Proveedor> listaProveedor;
 				control.nuevoProveedor();
+				
 				listaProveedor=control.dameTodosProveedores();
 			    actualiza1(listaProveedor);
 			}
