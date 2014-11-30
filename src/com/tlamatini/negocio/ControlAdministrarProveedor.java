@@ -26,8 +26,31 @@ public class ControlAdministrarProveedor {
 		nuevo.inicia();
 	}
 	
-	public Proveedor buscaProvedor(String empresa){
+	/**
+	 * Busca en la base de datos el Proveedor de la empresa con el nombre exacto enviado por parametros se usa para eliminar el proveedor con el nombre exacto @param
+	 * @param empresa
+	 * @return proveedor
+	 */
+	public Proveedor buscaProvedor_nombre(String empresa){
 		return daopreoveedor.buscaProveedor_empresa_nombre(empresa);
+	}
+	
+	/**
+	 * Busca en la base de datos a los proveedores de la empresa que contengan en su nombre algo de la cadena enviada @param
+	 * @param empresa
+	 * @return proveedor
+	 */
+	public ArrayList<Proveedor> buscaProvedor(String empresa){
+		return daopreoveedor.buscaProveedor_empresa(empresa);
+	}
+	
+	/**
+	 * Muestra todos los Proveedores existentes
+	 * @param  empresa
+	 * @return ArrayList<Proveedor>
+	 */
+	public ArrayList<Proveedor> buscaProvedores(String empresa){
+		return daopreoveedor.buscaProveedores_empresa_nombre(empresa);
 	}
 	
 	public boolean elminaProveedor(Proveedor proveedor){

@@ -120,6 +120,7 @@ public class VentanaAgregarProveedor extends JFrame {
 		
 		jbuttonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Proveedor aux;
 				if(jtextFieldEmpresa.getText().compareTo("")==0||jtextFieldTelefono.getText().compareTo("")==0||jtextAreaDireccion.getText().compareTo("")==0)
 					JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
 				//proveedor = new Proveedor(, , ));
@@ -129,13 +130,25 @@ public class VentanaAgregarProveedor extends JFrame {
 					int telefono =(Integer.parseInt(jtextFieldTelefono.getText()));
 					//control.agregarProveedor(proveedor);
 					proveedor = new Proveedor(empresa, direccion, telefono);
-					if(control.agregarProveedor(proveedor)){
-						jtextFieldEmpresa.setText("");
-						jtextAreaDireccion.setText("");
-						jtextFieldTelefono.setText("");
-						JOptionPane.showMessageDialog(null, "Proveedor Agregado");
-						}else
-							JOptionPane.showMessageDialog(null, "Error: Proveedor no agregado");
+					aux=control.buscaProvedor(proveedor);
+					if(aux!=null){
+						if(aux.getActivo()==1){
+							proveedor=control.buscaProvedor(proveedor);
+							JOptionPane.showMessageDialog(null, "Se encontro un historial del Proveedor, se agregara el proveedor");
+							control.restablecerProveedor(proveedor);
+						}else {
+							JOptionPane.showMessageDialog(null, "El proveedor ya existe, Intente de nuevo");
+						}						
+					}else{
+						if(control.agregarProveedor(proveedor)){
+							jtextFieldEmpresa.setText("");
+							jtextAreaDireccion.setText("");
+							jtextFieldTelefono.setText("");
+							JOptionPane.showMessageDialog(null, "Proveedor Agregado");
+							}else{
+								JOptionPane.showMessageDialog(null, "Error: Proveedor no agregado");
+							}
+					}
 					}
 			}
 		});

@@ -25,9 +25,9 @@ public class ControlModificaProveedor {
 	public boolean modificar(Proveedor pro){
 		return daoprovedor.modificaProveedor(pro);
 	}
-	public Proveedor busca(String busca){
+	/*public Proveedor busca(String busca){
 		return daoprovedor.buscaProveedor_empresa(busca);
-	}
+	}*/
 	
 	
 	

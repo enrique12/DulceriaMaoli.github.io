@@ -33,6 +33,7 @@ import com.tlamatini.persistencia.DAOProveedor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Vector;
 import javax.swing.ListSelectionModel;
 
@@ -170,8 +171,10 @@ public class VentanaAdministrarProveedor extends JFrame {
 		
 		jButtonMuestraTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				Actualiza1();
+				ArrayList<Proveedor> listaProveedor;
+				listaProveedor=control.dameTodosProveedores();
+
+				actualiza1(listaProveedor);
 				
 			}
 		});
@@ -179,25 +182,18 @@ public class VentanaAdministrarProveedor extends JFrame {
 		
 		jButtonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Proveedor aux=null;
+				ArrayList<Proveedor> aux;
 				String direccion = jtextFieldNombre.getText();
-				Vector datos = new Vector();
+				
 				if(jtextFieldNombre.getText().compareTo(" ")==0){
 					JOptionPane.showMessageDialog(null, "Debes llenar el campo");
 				}else{
 					aux=control.buscaProvedor(direccion);
 										
 					if(aux!=null){
-						jtableProvedores.setModel(new DefaultTableModel(
-								new Object[][] {
-									{aux.getEmpresa(), aux.getDireccion(), aux.getTelefono()},
-								},
-								new String[] {
-									"Empresa", "Direcci\u00F3n", "Telefono"
-								}
-							));
+						actualiza1(aux);
 					
-						System.out.println(" "+aux.getEmpresa()+" "+aux.getDireccion()+" "+aux.getTelefono());
+						//System.out.println(" "+aux.getEmpresa()+" "+aux.getDireccion()+" "+aux.getTelefono());
 					}else
 						JOptionPane.showMessageDialog(null, "No existe el provedor");
 				}
@@ -219,14 +215,18 @@ public class VentanaAdministrarProveedor extends JFrame {
 		
 		jButtonBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(jtableProvedores.getSelectedRow()==-1)
+				ArrayList<Proveedor> listaProveedor;
+				if(jtableProvedores.getSelectedRow()==-1){
 					JOptionPane.showMessageDialog(null, "Debes seleccionar un campo");
-				else{
-				     if(control.elminaProveedor(control.buscaProvedor((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0))))
+				}else{
+				     if(control.elminaProveedor(control.buscaProvedor_nombre((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0)))){
 						JOptionPane.showMessageDialog(null, "Se elimino el Proveedor");
-				    else
+				     } else{
 				    	JOptionPane.showMessageDialog(null, "Error: No se elimino el proveedor");
-					modelo.removeRow(jtableProvedores.getSelectedRow());
+				     }
+				     listaProveedor=control.dameTodosProveedores();
+				     actualiza1(listaProveedor);
+				    
 				}
 			}
 		});
@@ -240,24 +240,24 @@ public class VentanaAdministrarProveedor extends JFrame {
 	}
 
 
-	private void Actualiza1() {
+	private void actualiza1(ArrayList<Proveedor> mostrar) {
 		// TODO Auto-generated method stub
-		int i;
-		int tam = control.dameTodosProveedores().size();
-		System.out.println("*******"+tam);
-		
-		for(i=0;i<tam;i++){
-			Vector datos = new Vector();
-			String Empresa = control.dameTodosProveedores().get(i).getEmpresa();
-			String Direccion= control.dameTodosProveedores().get(i).getDireccion();
-			String Telefono = ""+(control.dameTodosProveedores().get(i).getTelefono());
-			datos.add(Empresa);
-			datos.add(Direccion);
-			datos.add(Telefono);
-			modelo.addRow(datos);
-			
+		int cont=0;
+		clearTable();
+		for(int i=0;i<mostrar.size();i++){
+			if(mostrar.get(i).getActivo()==0){
+				jtableProvedores.setValueAt(mostrar.get(i).getEmpresa(),cont,0);
+				jtableProvedores.setValueAt(mostrar.get(i).getDireccion(), cont, 1);
+				jtableProvedores.setValueAt(mostrar.get(i).getTelefono(), cont, 2);
+				cont++;
+			}
 		}
 		
 		
+	}
+	public void clearTable() {
+		   for (int i = 0; i < jtableProvedores.getRowCount(); i++)
+		      for(int j = 0; j < jtableProvedores.getColumnCount(); j++)
+		    	  jtableProvedores.setValueAt("", i, j);
 	}
 }
