@@ -46,7 +46,7 @@ public class VentanaAdministrarUsuario extends JFrame {
 	private JButton btnNewButton = new JButton("Aceptar");
 	private JButton btnNewButton_1 = new JButton("Cancelar");
 	private JLabel lblUsuario = new JLabel("Usuario:");
-	private JLabel lblAdmin = new JLabel("admin");
+	private JLabel lblAdmin = new JLabel();
 	private JRadioButton jRadioButtonAdmin = new JRadioButton("Administrador");
 	
 	private Usuario user;
@@ -59,11 +59,13 @@ public class VentanaAdministrarUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAdministrarUsuario(ConexionDB con) {
+	public VentanaAdministrarUsuario(ControlAdministrarUsuario contro,ConexionDB con) {
 		conexion=con;
+		control=contro;
+		lblAdmin.setText(control.getLoggedIn().getNick());
 		setTitle("Tlamatini");
 		
-		control = new ControlAdministrarUsuario(user,conexion);
+		//control = new ControlAdministrarUsuario(user,conexion);
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 437, 436);

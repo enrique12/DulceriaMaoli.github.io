@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+
 public class VentanaAgregarProveedor extends JFrame {
 	private Usuario usuario;
 	private Proveedor proveedor;
@@ -46,7 +47,7 @@ public class VentanaAgregarProveedor extends JFrame {
 	private JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
 	private JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 	private JLabel lblEmpresa = new JLabel("Empresa:");
-	private JLabel jLabelUsuario;
+	private JLabel jLabelUsuario= new JLabel();;
 	private JLabel lblUsuario = new JLabel("Usuario:");
 	private JPanel panel = new JPanel();
 	
@@ -57,12 +58,13 @@ public class VentanaAgregarProveedor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAgregarProveedor(ConexionDB con) {
+	public VentanaAgregarProveedor(ControlAgregaProveedor cont,ConexionDB con) {
 		conexion=con;
-		control = new ControlAgregaProveedor(usuario,conexion);
+		control=cont;
 		setTitle("Tlamatini");
 		setType(Type.UTILITY);
-
+		
+		
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 368, 343);
@@ -80,7 +82,7 @@ public class VentanaAgregarProveedor extends JFrame {
 		lblUsuario.setIcon(new ImageIcon("C:\\Users\\Azhala\\Documents\\EclipseProyectos\\Proyecto\\iconos\\user.png"));
 		lblUsuario.setBounds(195, 11, 90, 14);
 		panel.add(lblUsuario);
-		jLabelUsuario= new JLabel("Admin");
+		jLabelUsuario.setText(control.getLoggedIn().getNick());
 		jLabelUsuario.setBounds(267, 11, 69, 14);
 		panel.add(jLabelUsuario);
 
@@ -120,6 +122,7 @@ public class VentanaAgregarProveedor extends JFrame {
 		
 		jbuttonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Proveedor aux;
 				if(jtextFieldEmpresa.getText().compareTo("")==0||jtextFieldTelefono.getText().compareTo("")==0||jtextAreaDireccion.getText().compareTo("")==0)
 					JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
 				//proveedor = new Proveedor(, , ));
@@ -129,13 +132,25 @@ public class VentanaAgregarProveedor extends JFrame {
 					int telefono =(Integer.parseInt(jtextFieldTelefono.getText()));
 					//control.agregarProveedor(proveedor);
 					proveedor = new Proveedor(empresa, direccion, telefono);
-					if(control.agregarProveedor(proveedor)){
-						jtextFieldEmpresa.setText("");
-						jtextAreaDireccion.setText("");
-						jtextFieldTelefono.setText("");
-						JOptionPane.showMessageDialog(null, "Proveedor Agregado");
-						}else
-							JOptionPane.showMessageDialog(null, "Error: Proveedor no agregado");
+					aux=control.buscaProvedor(proveedor);
+					if(aux!=null){
+						if(aux.getActivo()==1){
+							proveedor=control.buscaProvedor(proveedor);
+							JOptionPane.showMessageDialog(null, "Se encontro un historial del Proveedor, se agregara el proveedor");
+							control.restablecerProveedor(proveedor);
+						}else {
+							JOptionPane.showMessageDialog(null, "El proveedor ya existe, Intente de nuevo");
+						}						
+					}else{
+						if(control.agregarProveedor(proveedor)){
+							jtextFieldEmpresa.setText("");
+							jtextAreaDireccion.setText("");
+							jtextFieldTelefono.setText("");
+							JOptionPane.showMessageDialog(null, "Proveedor Agregado");
+							}else{
+								JOptionPane.showMessageDialog(null, "Error: Proveedor no agregado");
+							}
+					}
 					}
 			}
 		});

@@ -130,9 +130,9 @@ public class ControlCompra {
 		
 		
 		if(producto.getCantidad()>=producto.getTopeMayoreo()){
-			return producto.getCostoUnitario()+producto.getCostoUnitario();
+			return producto.getCostoUnitario();
 		}else{
-			return producto.getCostoUnitario()+producto.getCostoUnitario();
+			return producto.getCostoUnitario();
 		}
 		
 	}

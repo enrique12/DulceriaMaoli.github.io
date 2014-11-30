@@ -23,9 +23,16 @@ public class ControlAgregaProveedor {
 		this.loggedIn = loggedIn;
 	}
 	
+	
+
+
 	public void inicia(){
-		 ventana = new VentanaAgregarProveedor(conexion);
+		ventana = new VentanaAgregarProveedor(this,conexion);
 		ventana.setVisible(true);
+	}
+
+	public Usuario getLoggedIn() {
+		return loggedIn;
 	}
 	
 	public boolean agregarProveedor(Proveedor proveedor){
@@ -33,7 +40,24 @@ public class ControlAgregaProveedor {
 			return true;
 		return false;
 	}
-	
+	public boolean restablecerProveedor(Proveedor provedor){
+		return daoProveedor.restablecerProveedor(provedor);
+	}
+	/**
+	 * Busca en la base den datos si el proveedor recibido como parametro ya existe en la base de datos ALEJ
+	 * @param Proveedor
+	 * @return Proveedor existente o null si no existe
+	 */
+	public Proveedor buscaProvedor(Proveedor provedor){
+		Proveedor aux;
+		aux=daoProveedor.buscaProveedor_empresa_nombre(provedor.getEmpresa());
+		if(provedor.getEmpresa().equals(aux.getEmpresa())){
+			return aux;
+		}else{
+			return null;
+		}
+		
+	}
 	public void cancelar(){
 			
 	}

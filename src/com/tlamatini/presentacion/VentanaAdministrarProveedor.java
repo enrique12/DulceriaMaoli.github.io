@@ -33,7 +33,9 @@ import com.tlamatini.persistencia.DAOProveedor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Vector;
+import javax.swing.ListSelectionModel;
 
 
 
@@ -41,17 +43,16 @@ public class VentanaAdministrarProveedor extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField jtextFieldNombre;
-	private JTable jtableProvedores;
 	private DAOProveedor daoprovedor;
+	private JButton jButtonMuestraTodos = new JButton("Mostrar Todos");
 	private JButton jButtonAceptar = new JButton("Aceptar");
 	private JButton jButtonAgregar = new JButton("Agregar");
 	private JButton jButtonBorrar = new JButton("Eliminar");
 	private JLabel lblProvedores = new JLabel("Provedores:");
 	private JSeparator separator = new JSeparator();
 	private JButton jButtonBuscar = new JButton("Buscar");
-	private JButton jButtonMuestraTodos = new JButton("Muestra Todos");
 	private JLabel lblClave = new JLabel("Empresa:");
-	private JLabel jlabelUsuario = new JLabel("Admin");
+	private JLabel jlabelUsuario = new JLabel();
 	private JLabel lblUsuario = new JLabel("Usuario:");
 	private JPanel panel = new JPanel();
 	private DefaultTableModel modelo;
@@ -60,6 +61,8 @@ public class VentanaAdministrarProveedor extends JFrame {
 	private ControlAdministrarProveedor control;
 	private ControlModificaProveedor controModifica;
 	ConexionDB conexion;
+	private final JScrollPane scrollPane = new JScrollPane();
+	private final JTable jtableProvedores = new JTable();
 
 	/**
 	 * Create the frame.
@@ -69,12 +72,13 @@ public class VentanaAdministrarProveedor extends JFrame {
 		conexion=con;
 		daoprovedor=new DAOProveedor(conexion);
 		this.control = control;
+		jlabelUsuario.setText(control.getLoggedIn().getNick());
 		setTitle("Tlamatini");
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		setAlwaysOnTop(true);
-		setBounds(100, 100, 450, 446);
+		setBounds(100, 100, 450, 488);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Administrar Provedores", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
@@ -82,19 +86,16 @@ public class VentanaAdministrarProveedor extends JFrame {
 		
 
 
-		panel.setBounds(10, 22, 414, 387);
+		panel.setBounds(10, 22, 414, 432);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		lblUsuario.setBounds(230, 11, 99, 14);
 		
 
 		lblUsuario.setIcon(new ImageIcon("C:\\Users\\Azhala\\Documents\\EclipseProyectos\\Proyecto\\iconos\\user.png"));
-		lblUsuario.setBounds(230, 11, 99, 14);
 		panel.add(lblUsuario);
-		
-
 		jlabelUsuario.setBounds(320, 11, 84, 14);
 		panel.add(jlabelUsuario);
-		
 		lblClave.setBounds(45, 41, 66, 14);
 		panel.add(lblClave);
 		
@@ -102,18 +103,11 @@ public class VentanaAdministrarProveedor extends JFrame {
 		jtextFieldNombre.setBounds(101, 38, 132, 20);
 		panel.add(jtextFieldNombre);
 		jtextFieldNombre.setColumns(10);
-
 		jButtonBuscar.setBounds(244, 36, 143, 23);
 		panel.add(jButtonBuscar);
-		
-		jButtonMuestraTodos.setBounds(244,65,143,23);
-		panel.add(jButtonMuestraTodos);
-
-		separator.setBounds(10, 92, 394, 2);
+		separator.setBounds(10, 107, 394, 2);
 		panel.add(separator);
-		
-
-		lblProvedores.setBounds(10, 93, 91, 14);
+		lblProvedores.setBounds(10, 113, 91, 14);
 		panel.add(lblProvedores);
 		
 		titulo.add("Empresa");
@@ -124,83 +118,140 @@ public class VentanaAdministrarProveedor extends JFrame {
 				return false;
 				}
 		};
-		jtableProvedores = new JTable(modelo);
-		jtableProvedores.getTableHeader().setReorderingAllowed(false);
-		//Actualiza();
-		
-		
-		jtableProvedores.setBounds(10, 114, 394, 205);
-		panel.add(jtableProvedores);
-		
-		
-
-		jButtonBorrar.setBounds(10, 338, 89, 35);
-		panel.add(jButtonBorrar);		
-		
-		
-		jButtonAgregar.setBounds(155, 338, 89, 35);
+		jButtonBorrar.setBounds(315, 386, 89, 35);
+		panel.add(jButtonBorrar);
+		jButtonAgregar.setBounds(119, 386, 89, 35);
 		panel.add(jButtonAgregar);
-		
-		
-		jButtonAceptar.setBounds(290, 338, 89, 35);
+		jButtonAceptar.setBounds(20, 386, 89, 35);
 		panel.add(jButtonAceptar);
+		jButtonMuestraTodos.setBounds(244, 70, 143, 23);
+		panel.add(jButtonMuestraTodos);
+		scrollPane.setBounds(10, 138, 394, 237);
+		
+		panel.add(scrollPane);
+		jtableProvedores.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"Nombre", "Direccion", "Telefono"
+			}
+		));
+		
+		scrollPane.setViewportView(jtableProvedores);
+		
+		JButton jButtonModifica = new JButton("Modificar");
+		jButtonModifica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Proveedor provedor;
+				ArrayList<Proveedor> listaProveedor;
+				if(jtableProvedores.getSelectedRow()==-1){
+					JOptionPane.showMessageDialog(null, "Debes seleccionar un campo");
+				}else{
+					provedor=control.buscaProvedor_nombre((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0));
+					control.modificaProveedor(provedor);
+				    /* if(control.elminaProveedor(control.buscaProvedor_nombre((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0)))){
+						JOptionPane.showMessageDialog(null, "Se elimino el Proveedor");
+				     } else{
+				    	JOptionPane.showMessageDialog(null, "Error: No se elimino el proveedor");
+				     }*/
+				     listaProveedor=control.dameTodosProveedores();
+				     actualiza1(listaProveedor);
+				    
+				}
+				
+				
+			}
+		});
+		jButtonModifica.setBounds(218, 386, 89, 35);
+		panel.add(jButtonModifica);
+		
+		
+		jButtonMuestraTodos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<Proveedor> listaProveedor;
+				listaProveedor=control.dameTodosProveedores();
+
+				actualiza1(listaProveedor);
+				
+			}
+		});
+		
 		
 		jButtonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Proveedor aux=null;
+				ArrayList<Proveedor> aux;
 				String direccion = jtextFieldNombre.getText();
-				Vector datos = new Vector();
+				
 				if(jtextFieldNombre.getText().compareTo(" ")==0){
 					JOptionPane.showMessageDialog(null, "Debes llenar el campo");
 				}else{
 					aux=control.buscaProvedor(direccion);
 										
 					if(aux!=null){
-						jtableProvedores.setModel(new DefaultTableModel(
-								new Object[][] {
-									{aux.getEmpresa(), aux.getDireccion(), aux.getTelefono()},
-								},
-								new String[] {
-									"Empresa", "Direcci\u00F3n", "Telefono"
-								}
-							));
+						actualiza1(aux);
 					
-						System.out.println(" "+aux.getEmpresa()+" "+aux.getDireccion()+" "+aux.getTelefono());
+						//System.out.println(" "+aux.getEmpresa()+" "+aux.getDireccion()+" "+aux.getTelefono());
 					}else
 						JOptionPane.showMessageDialog(null, "No existe el provedor");
 				}
 			}
 		});
 		
-		jButtonMuestraTodos.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Actualiza();
-			}
-		});
-		
 		jButtonAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ArrayList<Proveedor> listaProveedor;
 				control.nuevoProveedor();
+				
+				listaProveedor=control.dameTodosProveedores();
+			    actualiza1(listaProveedor);
 			}
 		});
-		/*jButtonModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controModifica = new ControlModificaProveedor(daoprovedor);
-				controModifica.inicia();
-				
-			}
-		});*/
+
 		
 		jButtonBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(jtableProvedores.getSelectedRow()==-1)
+				ArrayList<Proveedor> listaProveedor;
+				if(jtableProvedores.getSelectedRow()==-1){
 					JOptionPane.showMessageDialog(null, "Debes seleccionar un campo");
-				else{
-				     if(control.elminaProveedor(control.buscaProvedor((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0))))
+				}else{
+				     if(control.elminaProveedor(control.buscaProvedor_nombre((String)jtableProvedores.getValueAt(jtableProvedores.getSelectedRow(), 0)))){
 						JOptionPane.showMessageDialog(null, "Se elimino el Proveedor");
-				    else
+				     } else{
 				    	JOptionPane.showMessageDialog(null, "Error: No se elimino el proveedor");
-					modelo.removeRow(jtableProvedores.getSelectedRow());
+				     }
+				     listaProveedor=control.dameTodosProveedores();
+				     actualiza1(listaProveedor);
+				    
 				}
 			}
 		});
@@ -214,24 +265,24 @@ public class VentanaAdministrarProveedor extends JFrame {
 	}
 
 
-	private void Actualiza() {
+	private void actualiza1(ArrayList<Proveedor> mostrar) {
 		// TODO Auto-generated method stub
-		int i;
-		int tam = control.dameTodosProveedores().size();
-		System.out.println("*******"+tam);
-		
-		for(i=0;i<tam;i++){
-			Vector datos = new Vector();
-			String Empresa = control.dameTodosProveedores().get(i).getEmpresa();
-			String Direccion= control.dameTodosProveedores().get(i).getDireccion();
-			String Telefono = ""+(control.dameTodosProveedores().get(i).getTelefono());
-			datos.add(Empresa);
-			datos.add(Direccion);
-			datos.add(Telefono);
-			modelo.addRow(datos);
-			
+		int cont=0;
+		clearTable();
+		for(int i=0;i<mostrar.size();i++){
+			if(mostrar.get(i).getActivo()==0){
+				jtableProvedores.setValueAt(mostrar.get(i).getEmpresa(),cont,0);
+				jtableProvedores.setValueAt(mostrar.get(i).getDireccion(), cont, 1);
+				jtableProvedores.setValueAt(mostrar.get(i).getTelefono(), cont, 2);
+				cont++;
+			}
 		}
 		
 		
+	}
+	public void clearTable() {
+		   for (int i = 0; i < jtableProvedores.getRowCount(); i++)
+		      for(int j = 0; j < jtableProvedores.getColumnCount(); j++)
+		    	  jtableProvedores.setValueAt("", i, j);
 	}
 }

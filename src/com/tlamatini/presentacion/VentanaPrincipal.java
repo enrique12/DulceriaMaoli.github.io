@@ -336,7 +336,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		jButtonAdministrarProveedoresAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControlAdministrarProveedor proveedor=new ControlAdministrarProveedor(conexion);
+				ControlAdministrarProveedor proveedor=new ControlAdministrarProveedor(control.getUser(),conexion);
 			}
 		});
 		
@@ -346,7 +346,7 @@ public class VentanaPrincipal extends JFrame {
 		panel.add(jButtonAdministrarProveedoresAdmin);
 		jButtonFinanzasAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControlEstadoFinanciero estado=new ControlEstadoFinanciero(conexion);
+				ControlEstadoFinanciero estado=new ControlEstadoFinanciero(control.getUser(),conexion);
 			}
 		});
 		

@@ -6,23 +6,30 @@ import java.util.ListIterator;
 
 import com.tlamatini.datos.ConexionDB;
 import com.tlamatini.modelo.Compra;
+import com.tlamatini.modelo.Usuario;
 import com.tlamatini.modelo.Venta;
 import com.tlamatini.persistencia.DAOCompra;
 import com.tlamatini.persistencia.DAOVenta;
 import com.tlamatini.presentacion.VentanaEstadoFinanciero;
 
 public class ControlEstadoFinanciero {
-
+	private Usuario loggedIn;
 	DAOCompra daoCompra;
 	DAOVenta daoVenta;
 	ConexionDB conexion;
-	public ControlEstadoFinanciero(ConexionDB con){
+	public ControlEstadoFinanciero(Usuario usuario,ConexionDB con){
 		conexion=con;
+		loggedIn=usuario;
 		daoCompra = new DAOCompra(conexion);
 		daoVenta = new DAOVenta(conexion);
 		VentanaEstadoFinanciero ventana=new VentanaEstadoFinanciero(this);
 		ventana.setVisible(true);
 	}
+	
+	public Usuario getLoggedIn() {
+		return loggedIn;
+	}
+
 	/**
 	 * regresa las ventas realizadas en el intervalo de tiempo especificado
 	 * @param fechaInicio 

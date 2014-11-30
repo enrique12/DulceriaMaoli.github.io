@@ -62,7 +62,7 @@ public class VentanaEstadoFinanciero extends JFrame {
 	private JComboBox jcomboBoxDiaInicio = new JComboBox();
 	private JLabel lblFecha = new JLabel("Fecha final:");
 	private JLabel lblFechaInicio = new JLabel("Fecha inicio:");
-	private JLabel lblAdmin = new JLabel("Admin");
+	private JLabel lblAdmin = new JLabel();
 	private JLabel jLabelUsuario = new JLabel("Usuario:");
 	private JPanel panel = new JPanel();
 	private final JScrollPane scrollPane = new JScrollPane();
@@ -75,7 +75,7 @@ public class VentanaEstadoFinanciero extends JFrame {
 		setType(Type.UTILITY);
 		setTitle("Tlamatini");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+		lblAdmin.setText(control.getLoggedIn().getNick());
 		setAlwaysOnTop(true);
 		setBounds(100, 100, 450, 481);
 		contentPane = new JPanel();
