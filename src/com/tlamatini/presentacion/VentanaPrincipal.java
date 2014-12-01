@@ -1,41 +1,28 @@
 package com.tlamatini.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
-
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Font;
-import java.util.Calendar;
-import java.util.Date;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
 
 import com.tlamatini.datos.ConexionDB;
-import com.tlamatini.negocio.ControlAdministrarInventario;
 import com.tlamatini.negocio.ControlAdministrarProveedor;
 import com.tlamatini.negocio.ControlAdministrarUsuario;
 import com.tlamatini.negocio.ControlAgregarProducto;
@@ -48,16 +35,6 @@ import com.tlamatini.negocio.ControlProductosProximosACaducar;
 import com.tlamatini.negocio.ControlVenta;
 import com.tlamatini.negocio.ControlVentanaLogin;
 import com.tlamatini.negocio.ControlVentanaPrincipal;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 	
 public class VentanaPrincipal extends JFrame {
@@ -319,7 +296,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		
-		jButtonAdmistrarUsuariosAdmin.setBounds(10, 129, 119, 43);
+		jButtonAdmistrarUsuariosAdmin.setBounds(5, 129, 124, 43);
 		jButtonAdmistrarUsuariosAdmin.setVisible(false);
 		panel.add(jButtonAdmistrarUsuariosAdmin);
 		jButtonAdministrarInventarioAdmin.addActionListener(new ActionListener() {
