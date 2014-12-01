@@ -22,7 +22,6 @@ public class ConexionDB {
 */
     public boolean crearConexion(){
     try {
-    	
       Class.forName("com.mysql.jdbc.Driver");
       //primero poner la base de datos (dulceria_maoli), usuario de base(root), contraseña (en mi caso no tengo solo se pone "").ALEJ
       conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/dulceria_maoli","root","");
